@@ -131,7 +131,7 @@ $(function() {
         // We do this before scaling because after we invert the Y coordinate,
         // text would be displayed upside-down.
         tp.fillStyle = "black";
-        tp.font = "14px Ariel";
+        tp.font = "14px Arial";
         tp.textAlign = "center";
         tp.textBaseline = "bottom";
         tp.fillText(formatLimit(bbox.min.y), imageRight/2, canvas.height-inset);
