@@ -169,6 +169,15 @@
   height: 100px;
 }
 
+#large-preview {
+  text-align: center;
+}
+
+[data-route="workspace"] #large-preview>#small-toolpath {
+  width: 558px !important;
+  height: 315px !important;
+}
+
 @media (min-width: 736px) {
   [data-route="workspace"] {
     font-size: 14px;

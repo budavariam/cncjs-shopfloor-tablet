@@ -77,9 +77,14 @@
                 <div class="col-xs-5">
                     <div class="active-state" data-name="active-state"></div>
                 </div>
-                <div class="col-xs-2">
+                <div class="col-xs-1">
                     <button type="button" class="btn btn-default btn-start" onclick="cnc.doLeftButton()">
                         Start
+                    </button>
+                </div>
+                <div class="col-xs-1">
+                    <button type="button" class="btn btn-default" onclick="change_ui(true)">
+                        UI
                     </button>
                 </div>
                 <div class="col-xs-2">
@@ -145,7 +150,7 @@ code', 'M5')"><i class="fa fa-power-off"></i>&nbsp;Spindle Off</a>
         </div>
     </div>
 
-    <div class="axis-position">
+    <div class="axis-position" data-ui-variant="default">
         <div class="container-fluid">
 <!--
             <div class="row no-gutter">
@@ -271,7 +276,10 @@ code', 'M5')"><i class="fa fa-power-off"></i>&nbsp;Spindle Off</a>
         </div>
     </div>
     <div class="control-pad">
-        <div class="container-fluid">
+        <div data-ui-variant="custom" class="container-fluid" id="large-preview">
+
+        </div>
+        <div data-ui-variant="default" class="container-fluid">
           <div class="middle-block jog-controls">
             <div class="row no-gutter">
                 <div class="col-xs-2 info-button" id="distance">
@@ -572,7 +580,7 @@ code', 'M5')"><i class="fa fa-power-off"></i>&nbsp;Spindle Off</a>
                         <textarea class="gcode" id="gcode" rows="8" placeholder="GCode File Display" spellcheck="false" readonly>
                         </textarea>
                     </div>
-                    <div class="col-xs-3">
+                    <div class="col-xs-3" id="small-toolpath-og-parent">
 		      <canvas id="small-toolpath" class="previewer" width="100%" height="100%"></canvas>
                     </div>
                     <div class="col-xs-12">
@@ -653,6 +661,23 @@ code', 'M5')"><i class="fa fa-power-off"></i>&nbsp;Spindle Off</a>
             }
         }
     });
+    root.uiVariant = "default"
+    root.change_ui = function(toggle) {
+        if (toggle) {
+            root.uiVariant = root.uiVariant === "default" ? "custom" : "default"
+        }
+        if (root.uiVariant === "default") {
+            $("[data-ui-variant=default]").show()
+            $("[data-ui-variant=custom]").hide()
+            $('#small-toolpath').detach().appendTo('#small-toolpath-og-parent');
+        }
+        if (root.uiVariant === "custom") {
+            $('#small-toolpath').detach().appendTo('#large-preview');
+            $("[data-ui-variant=custom]").show()
+            $("[data-ui-variant=default]").hide()
+        }
+    }
+    change_ui(false)
 });
 </script>
 <script src="controller.js"></script>
